@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.NumberFormat;
 import java.util.List;
 
 public class TestaListagem {
@@ -24,10 +25,15 @@ public class TestaListagem {
 		//Laço que verifica se tem próximo doce na lista
 		while (conteudo.next()) {
 			//Pegar atributos da tabela
-			Integer id = conteudo.getInt(1);
-			String nome = conteudo.getString(2);
-			String descricao = conteudo.getString(3);
-			Float preco = conteudo.getFloat(4);
+			Integer id = conteudo.getInt("Doce_ID");
+			String nome = conteudo.getString("Nome");
+			String descricao = conteudo.getString("Descricao");
+			Float preco = conteudo.getFloat("Preco");
+			
+			System.out.println("ID: " + id);
+			System.out.println("Nome: " + nome);
+			System.out.println("Descrição: " + descricao);
+			System.out.println(NumberFormat.getCurrencyInstance().format(preco));
 		}
 		
 		conexao.close();
