@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class CriaConexao {
 
-	//Recuperando conexão com o banco de dados
+	//Criando conexão com o banco de dados
 	public Connection conecta() throws SQLException {
 		Connection conexao = DriverManager.getConnection("jdbc:mysql://localhost/brigadeiro?useTimezone=true&serverTimezone=UTC", "root", "root");
 		return conexao;
