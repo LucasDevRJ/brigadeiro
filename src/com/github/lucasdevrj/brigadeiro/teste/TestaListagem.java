@@ -41,6 +41,7 @@ public class TestaListagem {
 			System.out.println("Preço: "+ NumberFormat.getCurrencyInstance().format(preco));
 			System.out.println("Gramas: " + formatacao.format(gramas));
 			System.out.println("Unidades: " + unidades);
+			System.out.println();
 		}
 		
 		conexao.close();
