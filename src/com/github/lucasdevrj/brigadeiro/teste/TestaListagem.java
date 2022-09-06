@@ -1,18 +1,18 @@
 package com.github.lucasdevrj.brigadeiro.teste;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.NumberFormat;
-import java.util.List;
+import com.github.lucasdevrj.brigadeiro.conexao.CriaConexao;
 
 public class TestaListagem {
 
 	public static void main(String[] args) throws SQLException {
-		//Recuperar conexão com o banco
-		Connection conexao = DriverManager.getConnection("jdbc:mysql://localhost/brigadeiro?useTimezone=true&serverTimezone=UTC", "root", "root");
+		//Criando conexão com o banco
+		CriaConexao criaConexao = new CriaConexao();
+		Connection conexao = criaConexao.conecta();
 		
 		//Utilizar comandos do banco de dados (statements)
 		Statement comandosSql = conexao.createStatement();
