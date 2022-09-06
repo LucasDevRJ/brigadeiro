@@ -31,14 +31,16 @@ public class TestaListagem {
 			String descricao = conteudo.getString("Descricao");
 			Float preco = conteudo.getFloat("Preco");
 			Double gramas = conteudo.getDouble("Gramas");
+			Integer unidades = conteudo.getInt("Unidades");
 			
 			DecimalFormat formatacao = new DecimalFormat("0.00");
 			
 			System.out.println("ID: " + id);
 			System.out.println("Nome: " + nome);
 			System.out.println("Descrição: " + descricao);
-			System.out.println(NumberFormat.getCurrencyInstance().format(preco));
+			System.out.println("Preço: "+ NumberFormat.getCurrencyInstance().format(preco));
 			System.out.println("Gramas: " + formatacao.format(gramas));
+			System.out.println("Unidades: " + unidades);
 		}
 		
 		conexao.close();
