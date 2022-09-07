@@ -10,13 +10,20 @@ import com.github.lucasdevrj.brigadeiro.conexao.CriaConexao;
 public class TestaInsercaoComParametro {
 
 	public static void main(String[] args) throws SQLException {
+		//Guardar dados digitados pelo usuário do sistema
+		String nome = "Danoninho";
+		String descricao = "Danoninho caseiro";
+		Float preco = 7.00f;
+		Double gramas = 300.00;
+		Integer unidades = 43;
+		
 		//Criando conexão com o banco
 		CriaConexao criaConexao = new CriaConexao();
 		Connection conexao = criaConexao.conecta();
 				
 		//Para usar comandos SQL
 		Statement comandos = conexao.createStatement(); 																								//retorna o ID gerado
-		comandos.execute("INSERT INTO DOCE (NOME, DESCRICAO, PRECO, GRAMAS, UNIDADES) VALUES ('Pudim', 'Pudim de leite condensado', 6.00, 0.280, 34)", Statement.RETURN_GENERATED_KEYS);
+		comandos.execute("INSERT INTO DOCE (NOME, DESCRICAO, PRECO, GRAMAS, UNIDADES) VALUES ('" + nome + "', '" + descricao + "', '" + preco + "', '" + gramas + "', '" + unidades + "')", Statement.RETURN_GENERATED_KEYS);
 				
 		//Pegando o conteúdo do banco pegando ID do banco
 		ResultSet conteudo = comandos.getGeneratedKeys();
