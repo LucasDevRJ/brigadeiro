@@ -9,15 +9,17 @@ public class TestaAtualizacao {
 
 	public static void main(String[] args) throws SQLException {
 		//Guardar valor inserido
-		Integer id = 4; 
+		Integer idAtualizado = 4; 
+		Integer id = 12;
 		
 		//Criação de conexão com o banco
 		CriaConexao criaConexao = new CriaConexao();
 		Connection conexao = criaConexao.conecta();
 		
 		//Criação dos comandos SQL
-		PreparedStatement comandos = conexao.prepareStatement("UPDATE DOCE SET DOCE_ID = ? WHERE DOCE_ID = 10");
-		comandos.setInt(1, id);
+		PreparedStatement comandos = conexao.prepareStatement("UPDATE DOCE SET DOCE_ID = ? WHERE DOCE_ID = ?");
+		comandos.setInt(1, idAtualizado);
+		comandos.setInt(2, id);
 		
 		comandos.execute();
 		
