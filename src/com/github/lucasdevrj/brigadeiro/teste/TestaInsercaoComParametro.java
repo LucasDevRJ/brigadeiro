@@ -1,10 +1,9 @@
 package com.github.lucasdevrj.brigadeiro.teste;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-
 import com.github.lucasdevrj.brigadeiro.conexao.CriaConexao;
 
 public class TestaInsercaoComParametro {
@@ -20,10 +19,16 @@ public class TestaInsercaoComParametro {
 		//Criando conexão com o banco
 		CriaConexao criaConexao = new CriaConexao();
 		Connection conexao = criaConexao.conecta();
-				
+		
 		//Para usar comandos SQL
-		Statement comandos = conexao.createStatement(); 																								//retorna o ID gerado
-		comandos.execute("INSERT INTO DOCE (NOME, DESCRICAO, PRECO, GRAMAS, UNIDADES) VALUES ('" + nome + "', '" + descricao + "', '" + preco + "', '" + gramas + "', '" + unidades + "')", Statement.RETURN_GENERATED_KEYS);
+		//prepareStatement para gerenciar os atributos do banco proibindo comandos SQL dentro deles, assim forncendo mais segurança
+		PreparedStatement comandos = conexao.prepareStatement("INSERT INTO DOCE (NOME, DESCRICAO, PRECO, GRAMAS, UNIDADES) VALUES ('?, ?, ?, ?, ?')"); //retorna o ID gerado																							
+		//Settar atributos do banco
+		comandos.setString(1, nome);
+		comandos.setString(2, descricao);
+		comandos.setFloat(3, preco);
+		comandos.setDouble(4, gramas);
+		comandos.setInt(5, unidades);
 				
 		//Pegando o conteúdo do banco pegando ID do banco
 		ResultSet conteudo = comandos.getGeneratedKeys();
