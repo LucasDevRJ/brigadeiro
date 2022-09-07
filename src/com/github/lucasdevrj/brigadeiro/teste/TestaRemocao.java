@@ -1,9 +1,8 @@
 package com.github.lucasdevrj.brigadeiro.teste;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
-
 import com.github.lucasdevrj.brigadeiro.conexao.CriaConexao;
 
 public class TestaRemocao {
@@ -14,7 +13,12 @@ public class TestaRemocao {
 		Connection conexao = criaConexao.conecta();
 		
 		//Adição de comandos do SQL
-		Statement comandos = conexao.createStatement();
+		PreparedStatement comandos = conexao.prepareStatement("DELETE FROM PRODUTO WHERE DOCE_ID > ?");
+		
+		//Settar atributo do banco
+		comandos.setInt(1, 3);
+		
+		//Executar comandos SQL
 		comandos.execute("DELETE FROM DOCE WHERE Doce_ID > 3"); //Execução do comando SQL
 		
 		//Retorna o número de linhas após o statement ser executado

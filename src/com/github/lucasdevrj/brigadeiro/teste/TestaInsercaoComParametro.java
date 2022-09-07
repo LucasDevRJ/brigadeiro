@@ -12,8 +12,8 @@ public class TestaInsercaoComParametro {
 
 	public static void main(String[] args) throws SQLException {
 		//Guardar dados digitados pelo usuário do sistema
-		String nome = "Danoninho'";
-		String descricao = "Danoninho caseiro); DELETE FROM DOCE;";
+		String nome = "Danoninho";
+		String descricao = "Danoninho caseiro";
 		Float preco = 7.00f;
 		Double gramas = 300.00;
 		Integer unidades = 43;
