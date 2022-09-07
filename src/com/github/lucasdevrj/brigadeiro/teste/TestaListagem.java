@@ -1,9 +1,9 @@
 package com.github.lucasdevrj.brigadeiro.teste;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import com.github.lucasdevrj.brigadeiro.conexao.CriaConexao;
@@ -15,8 +15,8 @@ public class TestaListagem {
 		CriaConexao criaConexao = new CriaConexao();
 		Connection conexao = criaConexao.conecta();
 		
-		//Utilizar comandos do banco de dados (statements)
-		Statement comandosSql = conexao.createStatement();
+		//Utilizar comandos do banco de dados (statements) e gerencia-los
+		PreparedStatement comandosSql = conexao.prepareStatement("SELECT * FROM DOCE");
 		//Execução dos comandos SQL
 		comandosSql.execute("SELECT * FROM DOCE");
 		
