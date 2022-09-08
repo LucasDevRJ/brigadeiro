@@ -21,6 +21,7 @@ public class TestaInsercaoComParametro {
 		
 		//Chamando método e com parâmetros criados
 		adicionaVariavel("Danoninho", "Danoninho caseiro", 7.00f, 300.00, 43, comandos);
+		adicionaVariavel("Pé de moleque", "Pé de moleque com leite condensado", 5.00f, 84.00, 67, comandos);
 	}
 
 	private static void adicionaVariavel(String nome, String descricao, Float preco, Double gramas, Integer unidades,
