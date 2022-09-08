@@ -17,6 +17,10 @@ public class TestaListagem {
 		
 		//Utilizar comandos do banco de dados (statements) e gerencia-los
 		PreparedStatement comandosSql = conexao.prepareStatement("SELECT * FROM DOCE");
+		exibeLista(conexao, comandosSql);
+	}
+
+	private static void exibeLista(Connection conexao, PreparedStatement comandosSql) throws SQLException {
 		//Execução dos comandos SQL
 		comandosSql.execute("SELECT * FROM DOCE");
 		
