@@ -24,6 +24,7 @@ public class TestaInsercaoComParametro {
 			//Chamando método e com parâmetros criados
 			adicionaVariavel("Pé de moleque", "Pé de moleque com leite condensado", 5.00f, 84.00, 67, comandos);
 			adicionaVariavel("Danoninho", "Danoninho caseiro", 7.00f, 300.00, 43, comandos);
+			adicionaVariavel("Pudim", "Pudim de coco", 9.00f, 280.00, 32, comandos);
 			
 			//irá dar um commit caso não haja erro nenhum
 			conexao.commit();
@@ -48,9 +49,9 @@ public class TestaInsercaoComParametro {
 		comandos.setDouble(4, gramas);
 		comandos.setInt(5, unidades);
 		
-		if (nome.equals("Danoninho")) {
-			throw new RuntimeException("Não foi possível o doce!!!");
-		}
+//		if (nome.equals("Danoninho")) {
+//			throw new RuntimeException("Não foi possível o doce!!!");
+//		}
 		
 		comandos.execute(); //para executar os comandos SQL
 				
