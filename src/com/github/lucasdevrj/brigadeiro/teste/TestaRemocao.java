@@ -11,19 +11,33 @@ public class TestaRemocao {
 		//Criando conexão com o banco
 		CriaConexao criaConexao = new CriaConexao();
 		Connection conexao = criaConexao.conecta();
+		conexao.setAutoCommit(false); //controlar as transações do JDBC
 		
-		//Adição de comandos do SQL
-		PreparedStatement comandos = conexao.prepareStatement("DELETE FROM PRODUTO WHERE DOCE_ID > ?");
-		
+		try {
+			//Adição de comandos do SQL
+			PreparedStatement comandos = conexao.prepareStatement("DELETE FROM PRODUTO WHERE DOCE_ID > ?");
+			
+			excluiDados(comandos);
+			
+			//irá dar um commit caso não haja erro nenhum
+			conexao.commit();
+			
+			comandos.close();
+			conexao.close();
+		} catch (Exception erro) {
+			erro.printStackTrace();
+			System.out.println("Roolback ativado!!");
+			conexao.rollback();
+		}
+	}
+
+	private static void excluiDados(PreparedStatement comandos) throws SQLException {
 		//Settar atributo do banco
-		comandos.setInt(1, 3);
-		
-		//Executar comandos SQL
-		comandos.execute("DELETE FROM DOCE WHERE Doce_ID > 3"); //Execução do comando SQL
+		comandos.setInt(1, 20);
 		
 		//Retorna o número de linhas após o statement ser executado
-		Integer linhasModificadas = comandos.getUpdateCount();
+		Integer linhasExcluidas = comandos.getUpdateCount();
 		
-		System.out.println("Número de linhas excluídas: " + linhasModificadas);
+		System.out.println("Número de linhas excluídas: " + linhasExcluidas);
 	}
 }
