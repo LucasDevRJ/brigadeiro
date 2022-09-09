@@ -10,25 +10,24 @@ public class TestaAtualizacao {
 	public static void main(String[] args) throws SQLException {
 		//Criação de conexão com o banco
 		CriaConexao criaConexao = new CriaConexao();
-		Connection conexao = criaConexao.conecta();
-		conexao.setAutoCommit(false); //assumir o controle das transações
-		
-		try {
-			//Criação dos comandos SQL
-			PreparedStatement comandos = conexao.prepareStatement("UPDATE DOCE SET DOCE_ID = ? WHERE DOCE_ID = ?");
+		try (Connection conexao = criaConexao.conecta()) {
+			conexao.setAutoCommit(false); //assumir o controle das transações
 			
-			atualizaVariavel(6, 7, comandos);
-//			atualizaVariavel(5, 6, comandos);
-//			atualizaVariavel(7, 6, comandos);
-			
-			conexao.commit();
-			
-			comandos.close();
-			conexao.close();
-		} catch (Exception erro) {
-			erro.printStackTrace();
-			System.out.println("Roolback executado!!");
-			conexao.rollback();
+			try {
+				//Criação dos comandos SQL
+				PreparedStatement comandos = conexao.prepareStatement("UPDATE DOCE SET DOCE_ID = ? WHERE DOCE_ID = ?");
+				
+				atualizaVariavel(6, 7, comandos);
+				
+				conexao.commit();
+				
+				comandos.close();
+				conexao.close();
+			} catch (Exception erro) {
+				erro.printStackTrace();
+				System.out.println("Roolback executado!!");
+				conexao.rollback();
+			}
 		}
 	}
 
