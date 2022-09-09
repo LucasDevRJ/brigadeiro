@@ -16,10 +16,11 @@ public class TestaInsercaoComParametro {
 		Connection conexao = criaConexao.conecta();
 		conexao.setAutoCommit(false); //assumir o controle das transações do JDBC
 		
-		try {
+		try( //try-with-resources para não precisar fechar os statements
 			//Para usar comandos SQL
 			//prepareStatement para gerenciar os atributos do banco proibindo comandos SQL dentro deles, assim forncendo mais segurança
 			PreparedStatement comandos = conexao.prepareStatement("INSERT INTO DOCE (NOME, DESCRICAO, PRECO, GRAMAS, UNIDADES) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS); //retorna o ID gerado																							
+			) {
 			
 			//Chamando método e com parâmetros criados
 			adicionaVariavel("Pé de moleque", "Pé de moleque com leite condensado", 5.00f, 84.00, 67, comandos);
@@ -28,10 +29,6 @@ public class TestaInsercaoComParametro {
 			
 			//irá dar um commit caso não haja erro nenhum
 			conexao.commit();
-			
-			//Fechando métodos
-			comandos.close();
-			conexao.close();
 			
 		} catch (Exception erro) {
 			erro.printStackTrace();
@@ -63,5 +60,7 @@ public class TestaInsercaoComParametro {
 			Integer id = conteudo.getInt(1);
 			System.out.println("O ID criado é " + id);
 		}
+		
+		conteudo.close();
 	}
 }
