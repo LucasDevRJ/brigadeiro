@@ -13,11 +13,14 @@ public class TestaListagem {
 	public static void main(String[] args) throws SQLException {
 		//Criando conexão com o banco
 		CriaConexao criaConexao = new CriaConexao();
-		Connection conexao = criaConexao.conecta();
 		
-		//Utilizar comandos do banco de dados (statements) e gerencia-los
-		PreparedStatement comandosSql = conexao.prepareStatement("SELECT * FROM DOCE");
-		exibeLista(conexao, comandosSql);
+			try (Connection conexao = criaConexao.conecta()) {
+			
+				//Utilizar comandos do banco de dados (statements) e gerencia-los
+				try (PreparedStatement comandosSql = conexao.prepareStatement("SELECT * FROM DOCE")) {
+				exibeLista(conexao, comandosSql);
+			}
+		}
 	}
 
 	private static void exibeLista(Connection conexao, PreparedStatement comandosSql) throws SQLException {
@@ -25,29 +28,29 @@ public class TestaListagem {
 		comandosSql.execute("SELECT * FROM DOCE");
 		
 		//Pegar resultado da lista de doces
-		ResultSet conteudo = comandosSql.getResultSet();
+		try (ResultSet conteudo = comandosSql.getResultSet()) {
 		
-		//Laço que verifica se tem próximo doce na lista
-		while (conteudo.next()) {
-			//Pegar atributos da tabela
-			Integer id = conteudo.getInt("Doce_ID");
-			String nome = conteudo.getString("Nome");
-			String descricao = conteudo.getString("Descricao");
-			Float preco = conteudo.getFloat("Preco");
-			Double gramas = conteudo.getDouble("Gramas");
-			Integer unidades = conteudo.getInt("Unidades");
-			
-			DecimalFormat formatacao = new DecimalFormat("0.00");
-			
-			System.out.println("ID: " + id);
-			System.out.println("Nome: " + nome);
-			System.out.println("Descrição: " + descricao);
-			System.out.println("Preço: "+ NumberFormat.getCurrencyInstance().format(preco));
-			System.out.println("Gramas: " + formatacao.format(gramas));
-			System.out.println("Unidades: " + unidades);
-			System.out.println();
+			//Laço que verifica se tem próximo doce na lista
+			while (conteudo.next()) {
+				//Pegar atributos da tabela
+				Integer id = conteudo.getInt("Doce_ID");
+				String nome = conteudo.getString("Nome");
+				String descricao = conteudo.getString("Descricao");
+				Float preco = conteudo.getFloat("Preco");
+				Double gramas = conteudo.getDouble("Gramas");
+				Integer unidades = conteudo.getInt("Unidades");
+				
+				DecimalFormat formatacao = new DecimalFormat("0.00");
+				
+				System.out.println("ID: " + id);
+				System.out.println("Nome: " + nome);
+				System.out.println("Descrição: " + descricao);
+				System.out.println("Preço: "+ NumberFormat.getCurrencyInstance().format(preco));
+				System.out.println("Gramas: " + formatacao.format(gramas));
+				System.out.println("Unidades: " + unidades);
+				System.out.println();
+			}
+		
 		}
-		
-		conexao.close();
 	}
 }
