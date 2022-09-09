@@ -10,30 +10,30 @@ public class TestaRemocao {
 	public static void main(String[] args) throws SQLException {
 		//Criando conexão com o banco
 		CriaConexao criaConexao = new CriaConexao();
-		Connection conexao = criaConexao.conecta();
-		conexao.setAutoCommit(false); //controlar as transações do JDBC
-		
-		try {
-			//Adição de comandos do SQL
-			PreparedStatement comandos = conexao.prepareStatement("DELETE FROM PRODUTO WHERE DOCE_ID > ?");
+		try (Connection conexao = criaConexao.conecta()) {
+			conexao.setAutoCommit(false); //controlar as transações do JDBC
 			
-			excluiDados(comandos);
-			
-			//irá dar um commit caso não haja erro nenhum
-			conexao.commit();
-			
-			comandos.close();
-			conexao.close();
-		} catch (Exception erro) {
-			erro.printStackTrace();
-			System.out.println("Roolback ativado!!");
-			conexao.rollback();
+			try {
+				//Adição de comandos do SQL
+				PreparedStatement comandos = conexao.prepareStatement("DELETE FROM DOCE WHERE Doce_ID > ?");
+				
+				excluiDados(6, comandos);
+				
+				//irá dar um commit caso não haja erro nenhum
+				conexao.commit();
+			} catch (Exception erro) {
+				erro.printStackTrace();
+				System.out.println("Roolback ativado!!");
+				conexao.rollback();
+			}
 		}
 	}
 
-	private static void excluiDados(PreparedStatement comandos) throws SQLException {
+	public static void excluiDados(Integer id, PreparedStatement comandos) throws SQLException {
 		//Settar atributo do banco
-		comandos.setInt(1, 20);
+		comandos.setInt(1, id);
+		
+		comandos.execute();
 		
 		//Retorna o número de linhas após o statement ser executado
 		Integer linhasExcluidas = comandos.getUpdateCount();
