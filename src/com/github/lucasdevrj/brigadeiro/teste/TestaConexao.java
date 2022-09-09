@@ -10,11 +10,10 @@ public class TestaConexao {
 	public static void main(String[] args) throws SQLException {
 		//Recuperar conexão
 		CriaConexao criaConexao = new CriaConexao();
-		Connection conexao = criaConexao.conecta();
+		try (Connection conexao = criaConexao.conecta()) {
 		
-		System.out.println("Recuperando conexão!");
-		conexao.close();
-		System.out.println("Conexão fechada!");
+			System.out.println("Conexão criada!!!");
+		}
 	}
 
 }
