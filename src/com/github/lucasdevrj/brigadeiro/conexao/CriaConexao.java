@@ -1,24 +1,28 @@
 package com.github.lucasdevrj.brigadeiro.conexao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import javax.sql.DataSource;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class CriaConexao {
 	
+	public DataSource dataSource;
+	
 	//Implementar a interface data source, para criarmos a conexão com o banco
 	public CriaConexao() {
-		ComboPooledDataSource dataSource = new ComboPooledDataSource();
-		dataSource.setJdbcUrl("jdbc:mysql://localhost/brigadeiro?useTimezone=true&serverTimezone=UTC");
-		dataSource.setUser("root");
-		dataSource.setPassword("root");
+		ComboPooledDataSource dataSourceComboPooled = new ComboPooledDataSource();
+		dataSourceComboPooled.setJdbcUrl("jdbc:mysql://localhost/brigadeiro?useTimezone=true&serverTimezone=UTC");
+		dataSourceComboPooled.setUser("root");
+		dataSourceComboPooled.setPassword("root");
+		
+		this.dataSource = dataSourceComboPooled;
 	}
 
 	//Criando conexão com o banco de dados
 	public Connection conecta() throws SQLException {
-		Connection conexao = DriverManager.getConnection("jdbc:mysql://localhost/brigadeiro?useTimezone=true&serverTimezone=UTC", "root", "root");
-		return conexao;
+		return this.dataSource.getConnection();
 	}
 }
