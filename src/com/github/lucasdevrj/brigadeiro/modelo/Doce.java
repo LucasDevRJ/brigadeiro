@@ -16,6 +16,10 @@ public class Doce {
 		this.gramas = gramas;
 		this.unidades = unidades;
 	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public Integer getId() {
 		return id;
@@ -39,5 +43,10 @@ public class Doce {
 
 	public int getUnidades() {
 		return unidades;
+	}
+	
+	@Override
+	public String toString() {
+		return "Doce_ID: " + this.getId() + "\nNome: " + this.getNome() + "\nDescrição: " + this.getDescricao() + "\nPreço: " + this.getPreco() + "\nGramas: " + this.getGramas() + "\nUnidades: " + this.getUnidades();
 	}
 }

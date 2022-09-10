@@ -2,6 +2,7 @@ package com.github.lucasdevrj.brigadeiro.teste;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -22,7 +23,16 @@ public class TestaInsercaoComDoce {
 				comandosSql.setFloat(3, doce.getPreco());
 				comandosSql.setDouble(4, doce.getGramas());
 				comandosSql.setInt(5, doce.getUnidades());
+				
+				comandosSql.execute();
+				
+				try (ResultSet conteudo = comandosSql.getGeneratedKeys()) {
+					while (conteudo.next()) {
+						doce.setId(conteudo.getInt(1));
+					}
+				}
 			}
+			System.out.println(doce);
 		}
 	}
 }
