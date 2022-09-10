@@ -8,4 +8,12 @@ public class Doce {
 	private float preco;
 	private double gramas;
 	private int unidades;
+	
+	public Doce(String nome, String descricao, float preco, double gramas, int unidades) {
+		this.nome = nome;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.gramas = gramas;
+		this.unidades = unidades;
+	}
 }
