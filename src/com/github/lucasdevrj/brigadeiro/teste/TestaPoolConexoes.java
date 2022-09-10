@@ -9,7 +9,7 @@ public class TestaPoolConexoes {
 	public static void main(String[] args) throws SQLException {
 		CriaConexao criaConexao = new CriaConexao();
 		
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 15; i++) {
 			criaConexao.conecta();
 			System.out.println("Conexão de número: " + i);
 		}

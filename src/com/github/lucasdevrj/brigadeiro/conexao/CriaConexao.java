@@ -19,7 +19,7 @@ public class CriaConexao {
 		dataSourceComboPooled.setPassword("root");
 		
 		//Administrar conexões
-		dataSourceComboPooled.setMaxPoolSize(10);
+		dataSourceComboPooled.setMaxPoolSize(15);
 		
 		this.dataSource = dataSourceComboPooled;
 	}
