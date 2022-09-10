@@ -12,8 +12,7 @@ public class TestaInsercaoComParametro {
 
 	public static void main(String[] args) throws SQLException {
 		// Criando conexão com o banco
-		CriaConexao criaConexao = new CriaConexao();
-		try (Connection conexao = criaConexao.conecta()) {
+		try (Connection conexao = new CriaConexao().conecta()) {
 			conexao.setAutoCommit(false); // assumir o controle das transações do JDBC
 
 			try ( // try-with-resources para não precisar fechar os statements

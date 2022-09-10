@@ -9,8 +9,7 @@ public class TestaConexao {
 
 	public static void main(String[] args) throws SQLException {
 		//Recuperar conexão
-		CriaConexao criaConexao = new CriaConexao();
-		try (Connection conexao = criaConexao.conecta()) {
+		try (Connection conexao = new CriaConexao().conecta()) {
 		
 			System.out.println("Conexão criada!!!");
 		}

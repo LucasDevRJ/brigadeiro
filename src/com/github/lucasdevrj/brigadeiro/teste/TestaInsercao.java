@@ -11,8 +11,7 @@ public class TestaInsercao {
 
 	public static void main(String[] args) throws SQLException {
 		//Criando conexão com o banco
-		CriaConexao criaConexao = new CriaConexao();
-		try (Connection conexao = criaConexao.conecta()) {
+		try (Connection conexao = new CriaConexao().conecta()) {
 		
 			//Para usar comandos SQL
 			Statement comandos = conexao.createStatement(); 																								//retorna o ID gerado

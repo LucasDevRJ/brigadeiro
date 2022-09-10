@@ -16,7 +16,7 @@ public class TestaAtualizacao {
 				//Criação dos comandos SQL
 				PreparedStatement comandos = conexao.prepareStatement("UPDATE DOCE SET DOCE_ID = ? WHERE DOCE_ID = ?");
 				
-				atualizaVariavel(6, 7, comandos);
+				atualizaVariavel(7, 39, comandos);
 				
 				conexao.commit();
 				

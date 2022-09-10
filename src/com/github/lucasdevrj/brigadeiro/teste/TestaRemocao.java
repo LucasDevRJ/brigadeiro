@@ -9,8 +9,7 @@ public class TestaRemocao {
 	
 	public static void main(String[] args) throws SQLException {
 		//Criando conexão com o banco
-		CriaConexao criaConexao = new CriaConexao();
-		try (Connection conexao = criaConexao.conecta()) {
+		try (Connection conexao = new CriaConexao().conecta()) {
 			conexao.setAutoCommit(false); //controlar as transações do JDBC
 			
 			try {

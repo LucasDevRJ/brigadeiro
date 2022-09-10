@@ -12,9 +12,7 @@ public class TestaListagem {
 
 	public static void main(String[] args) throws SQLException {
 		//Criando conexão com o banco
-		CriaConexao criaConexao = new CriaConexao();
-		
-			try (Connection conexao = criaConexao.conecta()) {
+			try (Connection conexao = new CriaConexao().conecta()) {
 			
 				//Utilizar comandos do banco de dados (statements) e gerencia-los
 				try (PreparedStatement comandosSql = conexao.prepareStatement("SELECT * FROM DOCE")) {
