@@ -9,8 +9,7 @@ public class TestaAtualizacao {
 
 	public static void main(String[] args) throws SQLException {
 		//Criação de conexão com o banco
-		CriaConexao criaConexao = new CriaConexao();
-		try (Connection conexao = criaConexao.conecta()) {
+		try (Connection conexao = new CriaConexao().conecta()) {
 			conexao.setAutoCommit(false); //assumir o controle das transações
 			
 			try {

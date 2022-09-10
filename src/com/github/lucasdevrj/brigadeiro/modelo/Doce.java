@@ -16,4 +16,28 @@ public class Doce {
 		this.gramas = gramas;
 		this.unidades = unidades;
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public float getPreco() {
+		return preco;
+	}
+
+	public double getGramas() {
+		return gramas;
+	}
+
+	public int getUnidades() {
+		return unidades;
+	}
 }
