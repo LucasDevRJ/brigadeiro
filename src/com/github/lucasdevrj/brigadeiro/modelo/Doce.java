@@ -17,6 +17,15 @@ public class Doce {
 		this.unidades = unidades;
 	}
 	
+	public Doce(Integer id, String nome, String descricao, float preco, double gramas, int unidades) {
+		this.id = id;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.gramas = gramas;
+		this.unidades = unidades;
+	}
+	
 	public void setId(Integer id) {
 		this.id = id;
 	}
