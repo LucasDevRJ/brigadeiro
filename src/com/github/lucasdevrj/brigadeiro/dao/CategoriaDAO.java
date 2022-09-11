@@ -28,8 +28,11 @@ public class CategoriaDAO {
 			try (ResultSet conteudo = comandosSQL.getResultSet()) {
 				while (conteudo.next()) {
 					Categoria categoria = new Categoria(conteudo.getInt(1), conteudo.getString(2));
+
+					categorias.add(categoria);
 				}
 			}
 		}
+		return categorias;
 	}
 }
