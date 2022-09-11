@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.lucasdevrj.brigadeiro.modelo.Categoria;
 import com.github.lucasdevrj.brigadeiro.modelo.Doce;
 
 public class DoceDAO {
@@ -46,6 +47,26 @@ public class DoceDAO {
 		String sql = "SELECT * FROM DOCE";
 		
 		try (PreparedStatement comandos = conexao.prepareStatement(sql)) {
+			comandos.execute();
+			
+			try (ResultSet conteudo = comandos.getResultSet()) {
+				while (conteudo.next()) {
+					Doce doce = new Doce(conteudo.getInt(1), conteudo.getString(2), conteudo.getString(3), conteudo.getFloat(4), conteudo.getDouble(5), conteudo.getInt(6));
+					
+					doces.add(doce);
+				}
+			}
+		}
+		return doces;
+	}
+
+	public List<Doce> buscar(Categoria lc) throws SQLException {
+		List<Doce> doces = new ArrayList<Doce>();
+		
+		String sql = "SELECT * FROM DOCE WHERE CATEGORIA_ID = ?";
+		
+		try (PreparedStatement comandos = conexao.prepareStatement(sql)) {
+			comandos.setInt(1, lc.getId());
 			comandos.execute();
 			
 			try (ResultSet conteudo = comandos.getResultSet()) {
