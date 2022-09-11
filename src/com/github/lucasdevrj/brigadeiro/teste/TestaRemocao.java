@@ -16,7 +16,7 @@ public class TestaRemocao {
 				//Adição de comandos do SQL
 				PreparedStatement comandos = conexao.prepareStatement("DELETE FROM DOCE WHERE Doce_ID > ?");
 				
-				excluiDados(6, comandos);
+				excluiDados(10, comandos);
 				
 				//irá dar um commit caso não haja erro nenhum
 				conexao.commit();
