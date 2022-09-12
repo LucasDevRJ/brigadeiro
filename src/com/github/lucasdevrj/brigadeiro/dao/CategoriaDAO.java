@@ -36,8 +36,25 @@ public class CategoriaDAO {
 		return categorias;
 	}
 
-	public List<Categoria> listarDoces() {
+	public List<Categoria> listarDoces() throws SQLException {
+		Categoria ultima = null;
+		List<Categoria> categorias = new ArrayList<>();
 		
-		return null;
+		String sql = "SELECT C.ID, C.NOME, D.ID, D.NOME, D.DESCRICAO FROM CATEGORIA C INNER JOIN" + " DOCE D ON C.ID = D.CATEGORIA_ID";
+		
+		try (PreparedStatement comandosSQL = conexao.prepareStatement(sql)) {
+			comandosSQL.execute();
+			
+			try (ResultSet conteudo = comandosSQL.getResultSet()) {
+				while (conteudo.next()) {
+					if (ultima == null || !ultima.getNome().equals(conteudo.getString(2))) {
+						Categoria categoria = new Categoria(conteudo.getInt(1), conteudo.getString(2));
+						ultima = categoria;
+						categorias.add(categoria);
+					}
+				}
+			}
+		}
+		return categorias;
 	}
 }

@@ -17,6 +17,7 @@ public class TestaListagemDeCategorias {
 			CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
 			List<Categoria> listaCategorias = categoriaDAO.listarDoces();
 			listaCategorias.stream().forEach(lc -> {
+				System.out.println(lc.getNome());
 //				try {
 //					for (Doce doce : new DoceDAO(conexao).buscar(lc)) {
 //						System.out.println("Nome: " + doce.getNome());
