@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.lucasdevrj.brigadeiro.modelo.Categoria;
+import com.github.lucasdevrj.brigadeiro.modelo.Doce;
 
 public class CategoriaDAO {
 
@@ -52,6 +53,7 @@ public class CategoriaDAO {
 						ultima = categoria;
 						categorias.add(categoria);
 					}
+					Doce doce = new Doce(conteudo.getInt(3), conteudo.getString(4), conteudo.getString(5), conteudo.getFloat(6), conteudo.getDouble(7), conteudo.getInt(8));
 				}
 			}
 		}
