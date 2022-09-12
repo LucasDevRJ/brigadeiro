@@ -15,19 +15,19 @@ public class TestaListagemDeCategorias {
 	public static void main(String[] args) throws SQLException {
 		try (Connection conexao = new CriaConexao().conecta()) {
 			CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
-			List<Categoria> listaCategorias = categoriaDAO.listar();
+			List<Categoria> listaCategorias = categoriaDAO.listarDoces();
 			listaCategorias.stream().forEach(lc -> {
-				try {
-					for (Doce doce : new DoceDAO(conexao).buscar(lc)) {
-						System.out.println("Nome: " + doce.getNome());
-						System.out.println("Descrição: " + doce.getDescricao());
-						System.out.println("Categoria: " + lc.getNome());
-						System.out.println();
-					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				try {
+//					for (Doce doce : new DoceDAO(conexao).buscar(lc)) {
+//						System.out.println("Nome: " + doce.getNome());
+//						System.out.println("Descrição: " + doce.getDescricao());
+//						System.out.println("Categoria: " + lc.getNome());
+//						System.out.println();
+//					}
+//				} catch (SQLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 			});
 		}
 	} 

@@ -35,4 +35,9 @@ public class CategoriaDAO {
 		}
 		return categorias;
 	}
+
+	public List<Categoria> listarDoces() {
+		
+		return null;
+	}
 }
