@@ -25,7 +25,7 @@ public class BrigadeiroFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private JLabel labelNome, labelDescricao, labelCategoria;
-	private JTextField textoNome, textoDescricao;
+	private JTextField textoNome, textoDescricao, preco, gramas, unidades, id;
 	private JComboBox<Categoria> comboCategoria;
 	private JButton botaoSalvar, botaoEditar, botaoLimpar, botarApagar;
 	private JTable tabela;
@@ -154,6 +154,9 @@ public class BrigadeiroFrame extends JFrame {
 			Integer id = (Integer) objetoDaLinha;
 			String nome = (String) modelo.getValueAt(tabela.getSelectedRow(), 1);
 			String descricao = (String) modelo.getValueAt(tabela.getSelectedRow(), 2);
+			Float preco = (Float) modelo.getValueAt(tabela.getSelectedRow(), 3);
+			Double gramas = (Double) modelo.getValueAt(tabela.getSelectedRow(), 4);
+			int unidade = (int) modelo.getValueAt(tabela.getSelectedRow(), 5);
 			
 			this.doceController.alterar(nome, descricao, id);
 		} else {
@@ -190,10 +193,10 @@ public class BrigadeiroFrame extends JFrame {
 
 	private void salvar() {
 		if (!textoNome.getText().equals("") && !textoDescricao.getText().equals("")) {
-			Produto produto = new Produto(textoNome.getText(), textoDescricao.getText());
+			Doce doce = new Doce(textoNome.getText(), textoDescricao.getText(), Float.parseFloat(preco.getText()), Double.parseDouble(gramas.getText()), Integer.parseInt(unidades.getText()));
 			Categoria categoria = (Categoria) comboCategoria.getSelectedItem();
-			produto.setCategoriaId(categoria.getId());
-			this.doceController.salvar(produto);
+			doce.setCategoriaId(categoria.getId());
+			this.doceController.salvar(doce);
 			JOptionPane.showMessageDialog(this, "Doce salvo com sucesso!");
 			this.limpar();
 		} else {
