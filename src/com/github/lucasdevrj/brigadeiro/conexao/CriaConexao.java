@@ -25,7 +25,11 @@ public class CriaConexao {
 	}
 
 	//Criando conexão com o banco de dados
-	public Connection conecta() throws SQLException {
-		return this.dataSource.getConnection();
+	public Connection conecta(){
+		try {
+			return this.dataSource.getConnection();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

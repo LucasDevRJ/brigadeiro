@@ -18,23 +18,27 @@ public class CategoriaDAO {
 		this.conexao = conexao;
 	}
 	
-	public List<Categoria> listar() throws SQLException {
-		List<Categoria> categorias = new ArrayList<>();
-		
-		String sql = "SELECT * FROM CATEGORIA";
-		
-		try (PreparedStatement comandosSQL = conexao.prepareStatement(sql)) {
-			comandosSQL.execute();
+	public List<Categoria> listar(){
+		try {
+			List<Categoria> categorias = new ArrayList<>();
 			
-			try (ResultSet conteudo = comandosSQL.getResultSet()) {
-				while (conteudo.next()) {
-					Categoria categoria = new Categoria(conteudo.getInt(1), conteudo.getString(2));
+			String sql = "SELECT * FROM CATEGORIA";
+			
+			try (PreparedStatement comandosSQL = conexao.prepareStatement(sql)) {
+				comandosSQL.execute();
+				
+				try (ResultSet conteudo = comandosSQL.getResultSet()) {
+					while (conteudo.next()) {
+						Categoria categoria = new Categoria(conteudo.getInt(1), conteudo.getString(2));
 
-					categorias.add(categoria);
+						categorias.add(categoria);
+					}
 				}
 			}
+			return categorias;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
-		return categorias;
 	}
 
 	public List<Categoria> listarDoces() throws SQLException {
