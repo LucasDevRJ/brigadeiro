@@ -41,6 +41,27 @@ public class DoceDAO {
 		}
 	}
 	
+	public void salvarCategoria(Doce doce) throws SQLException {
+		String sql = "INSERT INTO DOCE (NOME, DESCRICAO, PRECO, GRAMAS, UNIDADES, CATEGORIA_ID) VALUES (?, ?, ?, ?, ?, ?)";
+		
+		try (PreparedStatement comandosSql = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+			comandosSql.setString(1, doce.getNome());
+			comandosSql.setString(2, doce.getDescricao());
+			comandosSql.setFloat(3, doce.getPreco());
+			comandosSql.setDouble(4, doce.getGramas());
+			comandosSql.setInt(5, doce.getUnidades());
+			comandosSql.setInt(6, doce.getId());
+			
+			comandosSql.execute();
+			
+			try (ResultSet conteudo = comandosSql.getGeneratedKeys()) {
+				while (conteudo.next()) {
+					doce.setId(conteudo.getInt(1));
+				}
+			}
+		}
+	}
+	
 	public List<Doce> listar() throws SQLException {
 		List<Doce> doces = new ArrayList<Doce>();
 		
