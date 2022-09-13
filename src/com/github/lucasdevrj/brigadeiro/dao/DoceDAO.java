@@ -112,11 +112,15 @@ public class DoceDAO {
 
 	public void alterar(String nome, String descricao, Float preco, Double gramas, int unidades, Integer id) {
 		try {
-			try (PreparedStatement stm = conexao.prepareStatement("UPDATE DOCE D SET D.NOME = ?, D.DESCRICAO = ?, D.PRECO = ?, D.GRAMAS = ?, D.UNIDADES = ? WHERE ID = ?")) {
-				stm.setString(1, nome);
-				stm.setString(2, descricao);
-				stm.setInt(3, id);
-				stm.execute();
+			try (PreparedStatement comandos = conexao.prepareStatement("UPDATE DOCE D SET D.NOME = ?, D.DESCRICAO = ?, D.PRECO = ?, D.GRAMAS = ?, D.UNIDADES = ? WHERE ID = ?")) {
+				comandos.setString(1, nome);
+				comandos.setString(2, descricao);
+				comandos.setFloat(3, preco);
+				comandos.setDouble(4, gramas);
+				comandos.setInt(5, unidades);
+				comandos.setInt(6, id);
+				
+				comandos.execute();
 			}
 			
 		} catch (SQLException e) {
