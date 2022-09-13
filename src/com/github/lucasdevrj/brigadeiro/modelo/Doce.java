@@ -25,7 +25,13 @@ public class Doce {
 		this.gramas = gramas;
 		this.unidades = unidades;
 	}
-	
+
+	public Doce(int id, String nome, String descricao) {
+		this.id = id;
+		this.nome = nome;
+		this.descricao = descricao;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}

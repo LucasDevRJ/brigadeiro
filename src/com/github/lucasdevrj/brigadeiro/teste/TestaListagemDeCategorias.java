@@ -17,18 +17,12 @@ public class TestaListagemDeCategorias {
 			CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
 			List<Categoria> listaCategorias = categoriaDAO.listarDoces();
 			listaCategorias.stream().forEach(lc -> {
-				System.out.println(lc.getNome());
-//				try {
-//					for (Doce doce : new DoceDAO(conexao).buscar(lc)) {
-//						System.out.println("Nome: " + doce.getNome());
-//						System.out.println("Descrição: " + doce.getDescricao());
-//						System.out.println("Categoria: " + lc.getNome());
-//						System.out.println();
-//					}
-//				} catch (SQLException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
+				for (Doce doce : lc.getDoces()) {
+					System.out.println("Nome: " + doce.getNome());
+					System.out.println("Descrição: " + doce.getDescricao());
+					System.out.println("Categoria: " + lc.getNome());
+					System.out.println();
+				}
 			});
 		}
 	} 

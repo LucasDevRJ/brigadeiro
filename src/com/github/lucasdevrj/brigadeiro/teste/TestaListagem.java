@@ -31,7 +31,7 @@ public class TestaListagem {
 			//Laço que verifica se tem próximo doce na lista
 			while (conteudo.next()) {
 				//Pegar atributos da tabela
-				Integer id = conteudo.getInt("Doce_ID");
+				Integer id = conteudo.getInt("ID");
 				String nome = conteudo.getString("Nome");
 				String descricao = conteudo.getString("Descricao");
 				Float preco = conteudo.getFloat("Preco");

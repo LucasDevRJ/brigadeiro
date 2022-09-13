@@ -43,6 +43,8 @@ public class CategoriaDAO {
 		
 		String sql = "SELECT C.ID, C.NOME, D.ID, D.NOME, D.DESCRICAO FROM CATEGORIA C INNER JOIN" + " DOCE D ON C.ID = D.CATEGORIA_ID";
 		
+//		String sql = "SELECT * FROM DOCE";
+		
 		try (PreparedStatement comandosSQL = conexao.prepareStatement(sql)) {
 			comandosSQL.execute();
 			
@@ -53,7 +55,9 @@ public class CategoriaDAO {
 						ultima = categoria;
 						categorias.add(categoria);
 					}
-					Doce doce = new Doce(conteudo.getInt(3), conteudo.getString(4), conteudo.getString(5), conteudo.getFloat(6), conteudo.getDouble(7), conteudo.getInt(8));
+					Doce doce = new Doce(conteudo.getInt(3), conteudo.getString(4), conteudo.getString(5));
+					
+					ultima.adicionar(doce);
 				}
 			}
 		}

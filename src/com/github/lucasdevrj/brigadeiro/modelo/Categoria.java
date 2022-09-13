@@ -21,4 +21,12 @@ public class Categoria {
 	public String getNome() {
 		return nome;
 	}
+
+	public void adicionar(Doce doce) {
+		this.doces.add(doce);
+	}
+	
+	public List<Doce> getDoces() {
+		return doces;
+	}
 }
