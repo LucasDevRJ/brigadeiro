@@ -63,22 +63,20 @@ public class DoceDAO {
 	}
 	
 	public List<Doce> listar() throws SQLException {
-		List<Doce> doces = new ArrayList<Doce>();
-		
-		String sql = "SELECT * FROM DOCE";
-		
-		try (PreparedStatement comandos = conexao.prepareStatement(sql)) {
-			comandos.execute();
-			
-			try (ResultSet conteudo = comandos.getResultSet()) {
-				while (conteudo.next()) {
-					Doce doce = new Doce(conteudo.getInt(1), conteudo.getString(2), conteudo.getString(3), conteudo.getFloat(4), conteudo.getDouble(5), conteudo.getInt(6));
-					
-					doces.add(doce);
-				}
+		try {
+			List<Doce> doces = new ArrayList<Doce>();
+			String sql = "SELECT * FROM DOCE";
+
+			try (PreparedStatement comandos = conexao.prepareStatement(sql)) {
+				comandos.execute();
+
+				trasformarResultSetProduto(doces, comandos);
 			}
+			return doces;
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
-		return doces;
 	}
 
 	public List<Doce> buscar(Categoria lc) throws SQLException {
@@ -99,5 +97,40 @@ public class DoceDAO {
 			}
 		}
 		return doces;
+	}
+	
+	public void deletar(Integer id) {
+		try {
+			try (PreparedStatement comandos = conexao.prepareStatement("DELETE FROM DOCE WHERE ID = ?")) {
+				comandos.setInt(1, id);
+				comandos.execute();
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void alterar(String nome, String descricao, Float preco, Double gramas, int unidades, Integer id) {
+		try {
+			try (PreparedStatement stm = conexao.prepareStatement("UPDATE DOCE D SET D.NOME = ?, D.DESCRICAO = ?, D.PRECO = ?, D.GRAMAS = ?, D.UNIDADES = ? WHERE ID = ?")) {
+				stm.setString(1, nome);
+				stm.setString(2, descricao);
+				stm.setInt(3, id);
+				stm.execute();
+			}
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private void trasformarResultSetProduto(List<Doce> doces, PreparedStatement comandos) throws SQLException {
+		try (ResultSet conteudo = comandos.getResultSet()) {
+			while (conteudo.next()) {
+				Doce doce = new Doce(conteudo.getInt(1), conteudo.getString(2), conteudo.getString(3), conteudo.getFloat(4), conteudo.getDouble(5), conteudo.getInt(6));
+
+				doces.add(doce);
+			}
+		}
 	}
 }
