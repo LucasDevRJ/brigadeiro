@@ -40,7 +40,7 @@ public class DoceController {
 		}
 	}
 
-	public void alterar(String nome, String descricao, Float preco, Double gramas, int unidades, int id) {
+	public void alterar(String nome, String descricao, Float preco, Double gramas, int unidades, Integer id) {
 		this.doceDAO.alterar(nome, descricao, preco, gramas, unidades, id);
 		System.out.println("Alterando doce: " + id);
 	}

@@ -24,7 +24,7 @@ public class BrigadeiroFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	private JLabel labelNome, labelDescricao, labelCategoria;
+	private JLabel labelNome, labelDescricao, labelPreco, labelGramas, labelUnidades, labelCategoria;
 	private JTextField textoNome, textoDescricao, preco, gramas, unidades, id;
 	private JComboBox<Categoria> comboCategoria;
 	private JButton botaoSalvar, botaoEditar, botaoLimpar, botarApagar;
@@ -43,22 +43,37 @@ public class BrigadeiroFrame extends JFrame {
 
 		labelNome = new JLabel("Nome do Doce");
 		labelDescricao = new JLabel("Descrição do Doce");
+		labelPreco = new JLabel("Preço do Doce");
+		labelGramas = new JLabel("Gramas do Doce");
+		labelUnidades = new JLabel("Unidades do Doce");
 		labelCategoria = new JLabel("Categoria do Doce");
 
 		labelNome.setBounds(10, 10, 240, 15);
 		labelDescricao.setBounds(10, 50, 240, 15);
+		labelPreco.setBounds(300, 10, 240, 15);
+		labelGramas.setBounds(300, 47, 240, 20);
+		labelUnidades.setBounds(300, 88, 240, 20);
 		labelCategoria.setBounds(10, 90, 240, 15);
 
 		labelNome.setForeground(Color.BLACK);
 		labelDescricao.setForeground(Color.BLACK);
+		labelPreco.setForeground(Color.BLACK);
+		labelGramas.setForeground(Color.BLACK);
+		labelUnidades.setForeground(Color.BLACK);
 		labelCategoria.setForeground(Color.BLACK);
 
 		container.add(labelNome);
 		container.add(labelDescricao);
+		container.add(labelPreco);
+		container.add(labelGramas);
+		container.add(labelUnidades);
 		container.add(labelCategoria);
 
 		textoNome = new JTextField();
 		textoDescricao = new JTextField();
+		preco = new JTextField();
+		gramas = new JTextField();
+		unidades = new JTextField();
 		comboCategoria = new JComboBox<Categoria>();
 
 		comboCategoria.addItem(new Categoria(0, "Selecione"));
@@ -69,10 +84,16 @@ public class BrigadeiroFrame extends JFrame {
 
 		textoNome.setBounds(10, 25, 265, 20);
 		textoDescricao.setBounds(10, 65, 265, 20);
+		preco.setBounds(300, 25, 240, 20);
+		gramas.setBounds(300, 65, 240, 20);
+		unidades.setBounds(300, 105, 240, 20);
 		comboCategoria.setBounds(10, 105, 265, 20);
 
 		container.add(textoNome);
 		container.add(textoDescricao);
+		container.add(preco);
+		container.add(gramas);
+		container.add(unidades);
 		container.add(comboCategoria);
 
 		botaoSalvar = new JButton("Salvar");
@@ -90,7 +111,10 @@ public class BrigadeiroFrame extends JFrame {
 		modelo.addColumn("Identificador do Doce");
 		modelo.addColumn("Nome do Doce");
 		modelo.addColumn("Descrição do Doce");
-
+		modelo.addColumn("Preço do Doce");
+		modelo.addColumn("Gramas do Doce");
+		modelo.addColumn("Unidades do Doce");
+		
 		preencherTabela();
 
 		tabela.setBounds(10, 185, 760, 300);
@@ -156,9 +180,9 @@ public class BrigadeiroFrame extends JFrame {
 			String descricao = (String) modelo.getValueAt(tabela.getSelectedRow(), 2);
 			Float preco = (Float) modelo.getValueAt(tabela.getSelectedRow(), 3);
 			Double gramas = (Double) modelo.getValueAt(tabela.getSelectedRow(), 4);
-			int unidade = (int) modelo.getValueAt(tabela.getSelectedRow(), 5);
+			int unidades = (int) modelo.getValueAt(tabela.getSelectedRow(), 5);
 			
-			this.doceController.alterar(nome, descricao, id);
+			this.doceController.alterar(nome, descricao, preco, gramas, unidades, id);
 		} else {
 			JOptionPane.showMessageDialog(this, "Por favor, selecionar o ID");
 		}
@@ -200,7 +224,7 @@ public class BrigadeiroFrame extends JFrame {
 			JOptionPane.showMessageDialog(this, "Doce salvo com sucesso!");
 			this.limpar();
 		} else {
-			JOptionPane.showMessageDialog(this, "Nome e Descri��o devem ser informados.");
+			JOptionPane.showMessageDialog(this, "Preencha todas as informações!");
 		}
 	}
 
@@ -211,6 +235,9 @@ public class BrigadeiroFrame extends JFrame {
 	private void limpar() {
 		this.textoNome.setText("");
 		this.textoDescricao.setText("");
+		this.preco.setText("");
+		this.gramas.setText("");
+		this.unidades.setText("");
 		this.comboCategoria.setSelectedIndex(0);
 	}
 }

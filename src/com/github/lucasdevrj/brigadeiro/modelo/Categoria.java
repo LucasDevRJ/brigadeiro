@@ -29,4 +29,9 @@ public class Categoria {
 	public List<Doce> getDoces() {
 		return doces;
 	}
+	
+	@Override
+	public String toString() {
+		return this.nome;
+	}
 }

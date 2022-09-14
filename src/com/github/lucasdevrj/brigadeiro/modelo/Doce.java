@@ -8,6 +8,7 @@ public class Doce {
 	private float preco;
 	private double gramas;
 	private int unidades;
+	private Integer categoriaID;
 	
 	public Doce(String nome, String descricao, float preco, double gramas, int unidades) {
 		this.nome = nome;
@@ -58,6 +59,14 @@ public class Doce {
 
 	public int getUnidades() {
 		return unidades;
+	}
+	
+	public Integer getCategoriaID() {
+		return categoriaID;
+	}
+	
+	public void setCategoriaId(Integer id2) {
+		this.categoriaID = id2;
 	}
 	
 	@Override
